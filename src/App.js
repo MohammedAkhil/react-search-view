@@ -18,15 +18,22 @@ function App() {
     if (e.keyCode === 38 && cursor > 0) {
       setCursor(cursor - 1);
 
-      ref.current[cursor - 1].current.scrollIntoView({
+      if(ref.current[cursor - 1].current){                //when keyDown is handled before any inputs is given by the user it throws  
+        ref.current[cursor - 1].current.scrollIntoView({  //TypeError: Cannot read property 'scrollIntoView' of null
         behavior: "smooth",
         inline: "nearest"
       });
+      }
+      
     } else if (e.keyCode === 40 && cursor < items.length - 1) {
-      ref.current[cursor].current.scrollIntoView({
+      
+      if(ref.current[cursor].current){
+        ref.current[cursor].current.scrollIntoView({
         behavior: "smooth",
         inline: "nearest"
       });
+      }
+      
       setCursor(cursor + 1);
     }
   };
